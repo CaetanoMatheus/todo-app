@@ -15,15 +15,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  testDatabase() async {
+  List<Category> categories = [];
+
+  getCategories() async {
     CategoryHelper categoryHelper = CategoryHelper();
-    print(await categoryHelper.all());
+    List<Category> categories = await categoryHelper.all();
+    setState(() {
+      this.categories = categories;
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    testDatabase();
+    getCategories();
   }
 
   @override
@@ -44,44 +49,25 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: TTextSeparator(title: 'CATEGORIES'),
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            physics: BouncingScrollPhysics(),
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Row(
-                children: [
-                  TBasicCard(
-                    smallText: '40 Tasks',
-                    title: 'Business',
+          Container(
+            height: 130,
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: this.categories.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.only(
+                    left: 10,
+                    right: (index == categories.length - 1) ? 10 : 0,
+                  ),
+                  child: TBasicCard(
+                    smallText: '40 taks',
+                    title: categories[index].name,
                     color: Colors.red,
                   ),
-                  SizedBox(width: 10),
-                  TBasicCard(
-                    smallText: '12 Tasks',
-                    title: 'Personal',
-                    color: Colors.blue,
-                  ),
-                  SizedBox(width: 10),
-                  TBasicCard(
-                    smallText: '12 Tasks',
-                    title: 'Personal',
-                    color: Colors.purple,
-                  ),
-                  SizedBox(width: 10),
-                  TBasicCard(
-                    smallText: '12 Tasks',
-                    title: 'Personal',
-                    color: Colors.green,
-                  ),
-                  SizedBox(width: 10),
-                  TBasicCard(
-                    smallText: '12 Tasks',
-                    title: 'Personal',
-                    color: Colors.indigo,
-                  ),
-                ],
-              ),
+                );
+              },
             ),
           ),
           Padding(
