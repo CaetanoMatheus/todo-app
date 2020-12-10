@@ -3,10 +3,6 @@ import 'package:todo_app/screens/home/widgets/home_categories_list.dart';
 import 'package:todo_app/screens/home/widgets/home_greetings.dart';
 import 'package:todo_app/screens/home/widgets/home_todos_list.dart';
 
-import 'package:todo_app/widgets/card/t_basic_card.dart';
-import 'package:todo_app/widgets/card/t_todo_card.dart';
-import 'package:todo_app/widgets/text/t_text_separator.dart';
-
 import 'package:todo_app/models/todo.dart';
 import 'package:todo_app/models/category.dart';
 import 'package:todo_app/helpers/category_helper.dart';
@@ -59,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HomeGreetings('What\'s up, Matheus!'),
-          HomeCategoriesList(categories: this.categories),
+          HomeCategoriesList(categories: this.categories, todos: this.todos),
           HomeTodosList(todos: this.todos),
         ],
       ),

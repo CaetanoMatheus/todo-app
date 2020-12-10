@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/models/todo.dart';
 
 import 'package:todo_app/widgets/card/t_basic_card.dart';
 import 'package:todo_app/widgets/text/t_text_separator.dart';
 
 import 'package:todo_app/models/category.dart';
 
-class HomeCategoriesList extends StatelessWidget {
+class HomeCategoriesList extends StatefulWidget {
   final List<Category> categories;
+  final List<Todo> todos;
+
+  const HomeCategoriesList({
+    Key key,
+    this.categories,
+    this.todos,
+  }) : super(key: key);
+
+  @override
+  _HomeCategoriesListState createState() => _HomeCategoriesListState();
+}
+
+class _HomeCategoriesListState extends State<HomeCategoriesList> {
   final String title = 'CATEGORIES';
 
-  const HomeCategoriesList({Key key, this.categories}) : super(key: key);
+  calculateRemainingTasks(Category category) {
+    int counter = 0;
+    this.widget.todos.forEach((todo) {
+      if (category.id == todo.categoryId) counter++;
+    });
+    return counter;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +46,7 @@ class HomeCategoriesList extends StatelessWidget {
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            itemCount: this.categories.length,
+            itemCount: this.widget.categories.length,
             itemBuilder: (context, index) => buildCategoryItem(index),
           ),
         ),
@@ -35,13 +55,16 @@ class HomeCategoriesList extends StatelessWidget {
   }
 
   Padding buildCategoryItem(int index) {
-    double rightPadding = (index == this.categories.length - 1) ? 10 : 0;
+    double rightPadding = (index == this.widget.categories.length - 1) ? 10 : 0;
+    Category category = this.widget.categories[index];
+    int remainingTodos = this.calculateRemainingTasks(category);
+
     return Padding(
       padding: EdgeInsets.only(left: 10, right: rightPadding),
       child: TBasicCard(
-        smallText: '40 taks',
-        title: this.categories[index].name,
-        color: Color(this.categories[index].color),
+        smallText: '$remainingTodos tasks',
+        title: category.name,
+        color: Color(category.color),
       ),
     );
   }
