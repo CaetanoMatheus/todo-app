@@ -47,12 +47,18 @@ class _HomeTodosListState extends State<HomeTodosList> {
     );
   }
 
-  TTodoCard buildTodoItem(int index) {
-    return TTodoCard(
-      todo: this.widget.todos[index],
-      onChange: (bool value) {
-        this.handleCheckTodo(value, this.widget.todos[index]);
-      },
+  Dismissible buildTodoItem(int index) {
+    Todo todo = this.widget.todos[index];
+
+    return Dismissible(
+      key: Key(index.toString()),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: TTodoCard(
+          todo: todo,
+          onChange: (bool value) => this.handleCheckTodo(value, todo),
+        ),
+      ),
     );
   }
 }
