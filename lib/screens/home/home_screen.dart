@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:todo_app/widgets/card/t_basic_card.dart';
+import 'package:todo_app/widgets/card/t_todo_card.dart';
 import 'package:todo_app/widgets/text/t_text_separator.dart';
 import 'package:todo_app/widgets/text/t_title.dart';
+
+import 'package:todo_app/models/todo.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -66,6 +69,16 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: TTextSeparator(title: 'TASKS'),
+          ),
+          Expanded(
+            child: ListView.builder(
+              physics: BouncingScrollPhysics(),
+              itemCount: todos.length,
+              itemBuilder: (context, index) => TTodoCard(
+                todo: todos[index],
+                onChange: (bool value) {},
+              ),
+            ),
           ),
         ],
       ),
