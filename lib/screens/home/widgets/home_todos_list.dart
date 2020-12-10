@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/helpers/todo_helper.dart';
-import 'package:todo_app/models/todo.dart';
 
 import 'package:todo_app/widgets/card/t_todo_card.dart';
 import 'package:todo_app/widgets/text/t_text_separator.dart';
+
+import 'package:todo_app/helpers/todo_helper.dart';
+import 'package:todo_app/models/todo.dart';
 
 class HomeTodosList extends StatefulWidget {
   final List<Todo> todos;
@@ -18,7 +19,7 @@ class _HomeTodosListState extends State<HomeTodosList> {
   final String title = 'TASKS';
   final TodoHelper todoHelper = TodoHelper();
 
-  handleCheckTodo(bool value, Todo todo) {
+  void _handleCheckTodo(bool value, Todo todo) {
     setState(() {
       todo.done = value;
     });
@@ -56,7 +57,7 @@ class _HomeTodosListState extends State<HomeTodosList> {
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: TTodoCard(
           todo: todo,
-          onChange: (bool value) => this.handleCheckTodo(value, todo),
+          onChange: (bool value) => this._handleCheckTodo(value, todo),
         ),
       ),
     );
