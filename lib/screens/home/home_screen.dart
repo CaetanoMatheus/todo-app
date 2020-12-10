@@ -1,35 +1,95 @@
 import 'package:flutter/material.dart';
+
+import 'package:todo_app/widgets/card/t_basic_card.dart';
+import 'package:todo_app/widgets/text/t_text_separator.dart';
 import 'package:todo_app/widgets/text/t_title.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFEFEFFF),
       appBar: buildAppBar(),
-      drawer: Drawer(),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {},
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [TTitle(title: 'What\'s up, Matheus!')],
-        ),
+      drawer: buildDrawer(),
+      floatingActionButton: buildFloatingActionButton(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: TTitle(title: 'What\'s up, Matheus!'),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: TTextSeparator(title: 'CATEGORIES'),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                children: [
+                  TBasicCard(
+                    smallText: '40 Tasks',
+                    title: 'Business',
+                    color: Colors.red,
+                  ),
+                  SizedBox(width: 10),
+                  TBasicCard(
+                    smallText: '12 Tasks',
+                    title: 'Personal',
+                    color: Colors.blue,
+                  ),
+                  SizedBox(width: 10),
+                  TBasicCard(
+                    smallText: '12 Tasks',
+                    title: 'Personal',
+                    color: Colors.purple,
+                  ),
+                  SizedBox(width: 10),
+                  TBasicCard(
+                    smallText: '12 Tasks',
+                    title: 'Personal',
+                    color: Colors.green,
+                  ),
+                  SizedBox(width: 10),
+                  TBasicCard(
+                    smallText: '12 Tasks',
+                    title: 'Personal',
+                    color: Colors.indigo,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: TTextSeparator(title: 'TASKS'),
+          ),
+        ],
       ),
     );
   }
 
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffEFEFFF),
       elevation: 0,
       iconTheme: IconThemeData(color: Colors.grey[600]),
       actions: [
         IconButton(icon: Icon(Icons.search), onPressed: null),
         IconButton(icon: Icon(Icons.notifications_outlined), onPressed: null),
       ],
+    );
+  }
+
+  Drawer buildDrawer() => Drawer();
+
+  FloatingActionButton buildFloatingActionButton() {
+    return FloatingActionButton(
+      child: Icon(Icons.add),
+      onPressed: () {},
     );
   }
 }
