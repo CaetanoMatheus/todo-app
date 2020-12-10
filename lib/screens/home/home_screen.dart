@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/home/widgets/home_categories_list.dart';
+import 'package:todo_app/screens/home/widgets/home_greetings.dart';
+import 'package:todo_app/screens/home/widgets/home_todos_list.dart';
 
 import 'package:todo_app/widgets/card/t_basic_card.dart';
 import 'package:todo_app/widgets/card/t_todo_card.dart';
 import 'package:todo_app/widgets/text/t_text_separator.dart';
-import 'package:todo_app/widgets/text/t_title.dart';
 
 import 'package:todo_app/models/todo.dart';
 import 'package:todo_app/models/category.dart';
@@ -42,10 +44,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    buildDatabaseStuff().then((_) {
-      getCategories();
-      getTodos();
-    });
+    // buildDatabaseStuff().then((_) {
+    getCategories();
+    getTodos();
+    // });
   }
 
   @override
@@ -58,49 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: TTitle(title: 'What\'s up, Matheus!'),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: TTextSeparator(title: 'CATEGORIES'),
-          ),
-          Container(
-            height: 130,
-            padding: EdgeInsets.symmetric(vertical: 20),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: this.categories.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.only(
-                    left: 10,
-                    right: (index == categories.length - 1) ? 10 : 0,
-                  ),
-                  child: TBasicCard(
-                    smallText: '40 taks',
-                    title: categories[index].name,
-                    color: Color(categories[index].color),
-                  ),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: TTextSeparator(title: 'TASKS'),
-          ),
-          Expanded(
-            child: ListView.builder(
-              physics: BouncingScrollPhysics(),
-              itemCount: this.todos.length,
-              itemBuilder: (context, index) => TTodoCard(
-                todo: this.todos[index],
-                onChange: (bool value) {},
-              ),
-            ),
-          ),
+          HomeGreetings('What\'s up, Matheus!'),
+          HomeCategoriesList(categories: this.categories),
+          HomeTodosList(todos: this.todos),
         ],
       ),
     );
