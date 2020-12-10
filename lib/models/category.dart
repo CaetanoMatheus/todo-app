@@ -18,11 +18,13 @@ class Category {
     this.color = category[columnColor];
   }
 
-  Map<String, dynamic> toMap() => {
-        columnId: this.id,
-        columnName: this.name,
-        columnColor: this.color,
-      };
+  Map<String, dynamic> toMap() {
+    return {
+      columnId: this.id,
+      columnName: this.name,
+      columnColor: this.color,
+    };
+  }
 
   @override
   String toString() {
