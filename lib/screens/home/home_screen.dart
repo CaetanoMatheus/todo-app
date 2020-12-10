@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/helpers/database_helper.dart';
-import 'package:todo_app/helpers/todo_helper.dart';
-import 'package:todo_app/models/category.dart';
 
 import 'package:todo_app/widgets/card/t_basic_card.dart';
 import 'package:todo_app/widgets/card/t_todo_card.dart';
@@ -9,7 +6,11 @@ import 'package:todo_app/widgets/text/t_text_separator.dart';
 import 'package:todo_app/widgets/text/t_title.dart';
 
 import 'package:todo_app/models/todo.dart';
+import 'package:todo_app/models/category.dart';
 import 'package:todo_app/helpers/category_helper.dart';
+import 'package:todo_app/helpers/todo_helper.dart';
+
+import 'package:todo_app/database_redefinition.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -20,15 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Category> categories = [];
   List<Todo> todos = [];
 
-  test() async {
-    DatabaseHelper helper = DatabaseHelper.getInstance();
-    await helper.destroyDabase();
-  }
-
   getCategories() async {
     CategoryHelper categoryHelper = CategoryHelper();
-    // Category category = Category.fill('Personal', Colors.purple.value);
-    // await categoryHelper.create(category);
     List<Category> categories = await categoryHelper.all();
     print('Categories ==> $categories');
     setState(() {
@@ -38,19 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   getTodos() async {
     TodoHelper todoHelper = TodoHelper();
-    // await todoHelper.create(Todo.fill('Go shopping', false, 1));
-    // await todoHelper.create(Todo.fill('Wash the Car', true, 2));
-    // await todoHelper.create(Todo.fill('Clean the house', true, 3));
-    // await todoHelper.create(Todo.fill('Play with my pets', false, 2));
-    // await todoHelper.create(Todo.fill('Plant a tree', false, 3));
-    // await todoHelper.create(Todo.fill('Play videogames', true, 1));
-    // await todoHelper.create(Todo.fill('Sing a son', true, 2));
-    // await todoHelper.create(Todo.fill('Take a bath', true, 2));
-    // await todoHelper.create(Todo.fill('Eat something', false, 1));
-    // await todoHelper.create(Todo.fill('Buy a new cellphone charger', false, 3));
-    // await todoHelper.create(Todo.fill('Turn off the lights', false, 3));
-    // await todoHelper.create(Todo.fill('Workout', false, 3));
-    // await todoHelper.create(Todo.fill('Go to sleep', false, 1));
     List<Todo> todos = await todoHelper.all();
     print('Todos ==> $todos');
     setState(() {
@@ -61,9 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // test();
-    getCategories();
-    getTodos();
+    buildDatabaseStuff().then((_) {
+      getCategories();
+      getTodos();
+    });
   }
 
   @override
