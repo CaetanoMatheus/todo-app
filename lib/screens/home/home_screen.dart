@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/helpers/database_helper.dart';
+import 'package:todo_app/helpers/todo_helper.dart';
 import 'package:todo_app/models/category.dart';
 
 import 'package:todo_app/widgets/card/t_basic_card.dart';
@@ -17,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Category> categories = [];
+  List<Todo> todos = [];
 
   test() async {
     DatabaseHelper helper = DatabaseHelper.getInstance();
@@ -25,11 +27,34 @@ class _HomeScreenState extends State<HomeScreen> {
 
   getCategories() async {
     CategoryHelper categoryHelper = CategoryHelper();
-    // Category category = Category.fill('Study', Colors.orange.value);
+    // Category category = Category.fill('Personal', Colors.purple.value);
     // await categoryHelper.create(category);
     List<Category> categories = await categoryHelper.all();
+    print('Categories ==> $categories');
     setState(() {
       this.categories = categories;
+    });
+  }
+
+  getTodos() async {
+    TodoHelper todoHelper = TodoHelper();
+    // await todoHelper.create(Todo.fill('Go shopping', false, 1));
+    // await todoHelper.create(Todo.fill('Wash the Car', true, 2));
+    // await todoHelper.create(Todo.fill('Clean the house', true, 3));
+    // await todoHelper.create(Todo.fill('Play with my pets', false, 2));
+    // await todoHelper.create(Todo.fill('Plant a tree', false, 3));
+    // await todoHelper.create(Todo.fill('Play videogames', true, 1));
+    // await todoHelper.create(Todo.fill('Sing a son', true, 2));
+    // await todoHelper.create(Todo.fill('Take a bath', true, 2));
+    // await todoHelper.create(Todo.fill('Eat something', false, 1));
+    // await todoHelper.create(Todo.fill('Buy a new cellphone charger', false, 3));
+    // await todoHelper.create(Todo.fill('Turn off the lights', false, 3));
+    // await todoHelper.create(Todo.fill('Workout', false, 3));
+    // await todoHelper.create(Todo.fill('Go to sleep', false, 1));
+    List<Todo> todos = await todoHelper.all();
+    print('Todos ==> $todos');
+    setState(() {
+      this.todos = todos;
     });
   }
 
@@ -38,8 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     // test();
     getCategories();
-    int color = Colors.red.value;
-    print(color);
+    getTodos();
   }
 
   @override
@@ -88,9 +112,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: ListView.builder(
               physics: BouncingScrollPhysics(),
-              itemCount: todos.length,
+              itemCount: this.todos.length,
               itemBuilder: (context, index) => TTodoCard(
-                todo: todos[index],
+                todo: this.todos[index],
                 onChange: (bool value) {},
               ),
             ),

@@ -39,9 +39,10 @@ class TBasicCard extends StatelessWidget {
             this.title,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: Color(0xff34495e),
-                fontWeight: FontWeight.bold,
-                fontSize: 20),
+              color: Color(0xff34495e),
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
           ),
           SizedBox(height: 10),
           Container(

@@ -27,13 +27,19 @@ class TodoHelper {
     Database database = await databaseHelper.database;
     List todos = await database.query(tableName);
     List<Todo> result = [];
-    todos.forEach((todo) => result.add(Todo.fromMap(todo)));
+    todos.forEach((todo) {
+      Map<String, dynamic> newTodo = Map.from(todo);
+      newTodo[columnDone] = newTodo[columnDone] == 1;
+      result.add(Todo.fromMap(newTodo));
+    });
     return result;
   }
 
   Future<Todo> create(Todo todo) async {
     Database database = await databaseHelper.database;
-    todo.id = await database.insert(tableName, todo.toMap());
+    Map mapTodo = todo.toMap();
+    mapTodo[columnDone] = mapTodo[columnDone] == true ? 1 : 0;
+    todo.id = await database.insert(tableName, mapTodo);
     return todo;
   }
 }

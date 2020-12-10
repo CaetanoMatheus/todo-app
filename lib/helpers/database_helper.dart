@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:todo_app/helpers/category_helper.dart';
+import 'package:todo_app/helpers/todo_helper.dart';
 
 class DatabaseHelper {
   Database _database;
@@ -32,8 +33,8 @@ class DatabaseHelper {
   }
 
   void _onDatabaseCreate(Database database, int newerVersion) async {
-    String sql = CategoryHelper.getCreateTableSql();
-    await database.execute(sql);
+    await database.execute(CategoryHelper.getCreateTableSql());
+    await database.execute(TodoHelper.getCreateTableSql());
   }
 
   Future destroyDabase() async {
