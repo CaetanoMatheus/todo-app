@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/models/category.dart';
 
 import 'package:todo_app/widgets/card/t_basic_card.dart';
 import 'package:todo_app/widgets/card/t_todo_card.dart';
@@ -6,8 +7,25 @@ import 'package:todo_app/widgets/text/t_text_separator.dart';
 import 'package:todo_app/widgets/text/t_title.dart';
 
 import 'package:todo_app/models/todo.dart';
+import 'package:todo_app/helpers/category_helper.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  testDatabase() async {
+    CategoryHelper categoryHelper = CategoryHelper();
+    print(await categoryHelper.all());
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    testDatabase();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

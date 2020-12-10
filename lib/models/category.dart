@@ -19,7 +19,7 @@ class Category {
   Map<String, dynamic> toMap() => {columnId: this.id, columnName: this.name};
 
   @override
-  String toString() => '(Id: ${this.id}, Name: ${this.name}';
+  String toString() => '(Id: ${this.id}, Name: ${this.name})';
 
   int get id => this._id;
 

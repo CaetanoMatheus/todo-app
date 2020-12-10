@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:todo_app/helpers/category_helper.dart';
 
 class DatabaseHelper {
   Database _database;
@@ -30,7 +31,10 @@ class DatabaseHelper {
     );
   }
 
-  void _onDatabaseCreate(Database database, int newerVersion) async {}
+  void _onDatabaseCreate(Database database, int newerVersion) async {
+    String sql = CategoryHelper.getCreateTableSql();
+    await database.execute(sql);
+  }
 
   Future destroyDabase() async {
     await deleteDatabase(await this._getDatabasePath());
