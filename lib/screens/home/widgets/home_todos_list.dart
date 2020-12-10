@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/helpers/todo_helper.dart';
 import 'package:todo_app/models/todo.dart';
 
 import 'package:todo_app/widgets/card/t_todo_card.dart';
 import 'package:todo_app/widgets/text/t_text_separator.dart';
 
-class HomeTodosList extends StatelessWidget {
+class HomeTodosList extends StatefulWidget {
   final List<Todo> todos;
-  final String title = 'TASKS';
 
   const HomeTodosList({Key key, this.todos}) : super(key: key);
+
+  @override
+  _HomeTodosListState createState() => _HomeTodosListState();
+}
+
+class _HomeTodosListState extends State<HomeTodosList> {
+  final String title = 'TASKS';
+  final TodoHelper todoHelper = TodoHelper();
+
+  handleCheckTodo(bool value, Todo todo) {
+    setState(() {
+      todo.done = value;
+    });
+    this.todoHelper.update(todo);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +38,7 @@ class HomeTodosList extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               physics: BouncingScrollPhysics(),
-              itemCount: this.todos.length,
+              itemCount: this.widget.todos.length,
               itemBuilder: (context, index) => buildTodoItem(index),
             ),
           ),
@@ -34,8 +49,10 @@ class HomeTodosList extends StatelessWidget {
 
   TTodoCard buildTodoItem(int index) {
     return TTodoCard(
-      todo: this.todos[index],
-      onChange: (bool value) {},
+      todo: this.widget.todos[index],
+      onChange: (bool value) {
+        this.handleCheckTodo(value, this.widget.todos[index]);
+      },
     );
   }
 }

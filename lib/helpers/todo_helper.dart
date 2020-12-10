@@ -42,4 +42,16 @@ class TodoHelper {
     todo.id = await database.insert(tableName, mapTodo);
     return todo;
   }
+
+  Future<int> update(Todo todo) async {
+    Database database = await databaseHelper.database;
+    Map mapTodo = todo.toMap();
+    mapTodo[columnDone] = mapTodo[columnDone] == true ? 1 : 0;
+    return await database.update(
+      tableName,
+      mapTodo,
+      where: '$columnId = ?',
+      whereArgs: [todo.id],
+    );
+  }
 }

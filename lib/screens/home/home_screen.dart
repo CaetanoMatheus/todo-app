@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
   getCategories() async {
     CategoryHelper categoryHelper = CategoryHelper();
     List<Category> categories = await categoryHelper.all();
-    print('Categories ==> $categories');
     setState(() {
       this.categories = categories;
     });
@@ -35,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
   getTodos() async {
     TodoHelper todoHelper = TodoHelper();
     List<Todo> todos = await todoHelper.all();
-    print('Todos ==> $todos');
     setState(() {
       this.todos = todos;
     });
