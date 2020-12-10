@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/widgets/text/t_title.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -7,8 +8,15 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: buildAppBar(),
       drawer: Drawer(),
-      body: Column(
-        children: [],
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [TTitle(title: 'What\'s up, Matheus!')],
+        ),
       ),
     );
   }
