@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/helpers/database_helper.dart';
 import 'package:todo_app/models/category.dart';
 
 import 'package:todo_app/widgets/card/t_basic_card.dart';
@@ -17,8 +18,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Category> categories = [];
 
+  test() async {
+    DatabaseHelper helper = DatabaseHelper.getInstance();
+    await helper.destroyDabase();
+  }
+
   getCategories() async {
     CategoryHelper categoryHelper = CategoryHelper();
+    // Category category = Category.fill('Study', Colors.orange.value);
+    // await categoryHelper.create(category);
     List<Category> categories = await categoryHelper.all();
     setState(() {
       this.categories = categories;
@@ -28,7 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    // test();
     getCategories();
+    int color = Colors.red.value;
+    print(color);
   }
 
   @override
@@ -64,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: TBasicCard(
                     smallText: '40 taks',
                     title: categories[index].name,
-                    color: Colors.red,
+                    color: Color(categories[index].color),
                   ),
                 );
               },

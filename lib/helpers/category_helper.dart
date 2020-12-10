@@ -6,6 +6,7 @@ import 'package:todo_app/models/category.dart';
 final String tableName = 'categories';
 final String columnId = 'id';
 final String columnName = 'name';
+final String columnColor = 'color';
 
 class CategoryHelper {
   DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
@@ -14,7 +15,8 @@ class CategoryHelper {
     return '''
       CREATE TABLE $tableName (
         $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
-        $columnName TEXT
+        $columnName TEXT,
+        $columnColor INTEGER
       );
     ''';
   }
