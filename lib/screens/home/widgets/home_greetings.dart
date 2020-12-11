@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:todo_app/widgets/text/t_title.dart';
 
+import 'package:todo_app/util/constants.dart';
+
 class HomeGreetings extends StatelessWidget {
   final String message;
 
@@ -9,8 +11,8 @@ class HomeGreetings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(20),
+    return Container(
+      padding: EdgeInsets.all(padding1),
       child: TTitle(title: this.message),
     );
   }

@@ -1,31 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/models/todo.dart';
 
 import 'package:todo_app/widgets/card/t_basic_card.dart';
 import 'package:todo_app/widgets/text/t_text_separator.dart';
 
 import 'package:todo_app/models/category.dart';
+import 'package:todo_app/models/todo.dart';
+import 'package:todo_app/util/constants.dart';
 
-class HomeCategoriesList extends StatefulWidget {
+class HomeCategoriesList extends StatelessWidget {
   final List<Category> categories;
   final List<Todo> todos;
+  final String _title = 'CATEGORIES';
 
-  const HomeCategoriesList({
-    Key key,
-    this.categories,
-    this.todos,
-  }) : super(key: key);
-
-  @override
-  _HomeCategoriesListState createState() => _HomeCategoriesListState();
-}
-
-class _HomeCategoriesListState extends State<HomeCategoriesList> {
-  final String title = 'CATEGORIES';
+  const HomeCategoriesList({Key key, this.categories, this.todos})
+      : super(key: key);
 
   calculateRemainingTasks(Category category) {
     int counter = 0;
-    this.widget.todos.forEach((todo) {
+    this.todos.forEach((Todo todo) {
       if (category.id == todo.categoryId) counter++;
     });
     return counter;
@@ -37,16 +29,16 @@ class _HomeCategoriesListState extends State<HomeCategoriesList> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: TTextSeparator(title: this.title),
+          padding: EdgeInsets.symmetric(horizontal: padding1),
+          child: TTextSeparator(title: this._title),
         ),
         Container(
           height: 130,
-          padding: EdgeInsets.symmetric(vertical: 20),
+          padding: EdgeInsets.symmetric(vertical: padding1),
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            itemCount: this.widget.categories.length,
+            itemCount: this.categories.length,
             itemBuilder: (context, index) => buildCategoryItem(index),
           ),
         ),
@@ -55,12 +47,12 @@ class _HomeCategoriesListState extends State<HomeCategoriesList> {
   }
 
   Padding buildCategoryItem(int index) {
-    double rightPadding = (index == this.widget.categories.length - 1) ? 10 : 0;
-    Category category = this.widget.categories[index];
+    double rightPadding = (index == this.categories.length - 1) ? padding2 : 0;
+    Category category = this.categories[index];
     int remainingTodos = this.calculateRemainingTasks(category);
 
     return Padding(
-      padding: EdgeInsets.only(left: 10, right: rightPadding),
+      padding: EdgeInsets.only(left: padding2, right: rightPadding),
       child: TBasicCard(
         smallText: '$remainingTodos tasks',
         title: category.name,
