@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/create_todo/create_todo_screen.dart';
 import 'package:todo_app/screens/home/widgets/home_categories_list.dart';
 import 'package:todo_app/screens/home/widgets/home_greetings.dart';
 import 'package:todo_app/screens/home/widgets/home_todos_list.dart';
@@ -35,6 +36,13 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  navigateToCreateTodoScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CreateTodoScreen()),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -51,13 +59,16 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: buildAppBar(),
       drawer: buildDrawer(),
       floatingActionButton: buildFloatingActionButton(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          HomeGreetings('What\'s up, Matheus!'),
-          HomeCategoriesList(categories: this.categories, todos: this.todos),
-          HomeTodosList(todos: this.todos),
-        ],
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HomeGreetings('What\'s up, Matheus!'),
+            HomeCategoriesList(categories: this.categories, todos: this.todos),
+            HomeTodosList(todos: this.todos),
+          ],
+        ),
       ),
     );
   }
@@ -79,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
   FloatingActionButton buildFloatingActionButton() {
     return FloatingActionButton(
       child: Icon(Icons.add),
-      onPressed: () {},
+      onPressed: navigateToCreateTodoScreen,
     );
   }
 }

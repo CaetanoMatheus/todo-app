@@ -28,31 +28,25 @@ class _HomeTodosListState extends State<HomeTodosList> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: TTextSeparator(title: this.title),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: TTextSeparator(title: this.title),
+        ),
+        Column(
+          children: List.from(
+            this.widget.todos.map((todo) => this.buildTodoItem(todo)),
           ),
-          Expanded(
-            child: ListView.builder(
-              physics: BouncingScrollPhysics(),
-              itemCount: this.widget.todos.length,
-              itemBuilder: (context, index) => buildTodoItem(index),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  Dismissible buildTodoItem(int index) {
-    Todo todo = this.widget.todos[index];
-
+  Dismissible buildTodoItem(Todo todo) {
     return Dismissible(
-      key: Key(index.toString()),
+      key: Key(todo.id.toString()),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: TTodoCard(
