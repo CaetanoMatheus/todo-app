@@ -33,7 +33,7 @@ class HomeCategoriesList extends StatelessWidget {
           child: TTextSeparator(title: this._title),
         ),
         Container(
-          height: 130,
+          height: 140,
           padding: EdgeInsets.symmetric(vertical: padding1),
           child: ListView.builder(
             physics: BouncingScrollPhysics(),

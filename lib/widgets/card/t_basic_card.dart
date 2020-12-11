@@ -16,8 +16,7 @@ class TBasicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 160,
-      height: 90,
+      width: 200,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,

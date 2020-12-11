@@ -19,7 +19,12 @@ class TTodoCard extends StatelessWidget {
       child: Row(
         children: [
           Checkbox(value: this.todo.done, onChanged: onChange),
-          Text(this.todo.title, style: TextStyle(fontSize: 16)),
+          Flexible(
+            child: Text(
+              this.todo.title,
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
         ],
       ),
     );

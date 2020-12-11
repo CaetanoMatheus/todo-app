@@ -7,6 +7,10 @@ class TTextSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(this.title, style: TextStyle(color: Colors.grey[600]));
+    return Text(
+      this.title,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(color: Colors.grey[600]),
+    );
   }
 }

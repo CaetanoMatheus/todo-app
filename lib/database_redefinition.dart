@@ -26,7 +26,10 @@ final todos = [
   Todo.fill('Sing a son', true, 2),
   Todo.fill('Take a bath', true, 2),
   Todo.fill('Eat something', false, 1),
-  Todo.fill('Buy a new cellphone charger', false, 3),
+  Todo.fill(
+      'Buy a new cellphone charger Buy a new cellphone charger Buy a new cellphone charger',
+      false,
+      3),
   Todo.fill('Turn off the lights', false, 3),
   Todo.fill('Workout', false, 3),
   Todo.fill('Go to sleep', false, 1),
