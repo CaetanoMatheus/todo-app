@@ -12,7 +12,7 @@ class HomeGreetings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(padding1),
+      padding: EdgeInsets.symmetric(vertical: padding1, horizontal: padding),
       child: TTitle(title: this.message),
     );
   }

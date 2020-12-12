@@ -29,30 +29,29 @@ class HomeCategoriesList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: padding1),
+          padding: EdgeInsets.symmetric(horizontal: padding),
           child: TTextSeparator(title: this._title, spacedLetters: true),
         ),
-        Container(
-          height: 150,
-          padding: EdgeInsets.symmetric(vertical: padding1),
-          child: ListView.builder(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            itemCount: this.categories.length,
-            itemBuilder: (context, index) => buildCategoryItem(index),
+        SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: padding1),
+            child: Row(
+              children: List.from(this.categories.map(
+                  (Category category) => this._buildCategoryItem(category))),
+            ),
           ),
-        ),
+        )
       ],
     );
   }
 
-  Padding buildCategoryItem(int index) {
-    double rightPadding = (index == this.categories.length - 1) ? padding2 : 0;
-    Category category = this.categories[index];
+  Widget _buildCategoryItem(Category category) {
     int remainingTodos = this.calculateRemainingTasks(category);
 
     return Padding(
-      padding: EdgeInsets.only(left: padding2, right: rightPadding),
+      padding: EdgeInsets.only(left: padding1 - 5),
       child: TBasicCard(
         smallText: '$remainingTodos tasks',
         title: category.name,

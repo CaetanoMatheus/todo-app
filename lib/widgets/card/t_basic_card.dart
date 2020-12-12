@@ -20,15 +20,16 @@ class TBasicCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 200,
+      height: 120,
       padding: EdgeInsets.only(top: 25, right: 20, bottom: 20, left: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: borderRadius,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey[200],
-            offset: Offset(2, 3),
-            blurRadius: 5,
+            color: textSecondaryColor.withOpacity(.3),
+            offset: Offset(2, 4),
+            blurRadius: 15,
           )
         ],
       ),
@@ -46,7 +47,7 @@ class TBasicCard extends StatelessWidget {
               fontSize: 20,
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 20),
           Container(
             height: 5,
             decoration: BoxDecoration(
