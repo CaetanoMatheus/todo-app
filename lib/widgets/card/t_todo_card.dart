@@ -22,7 +22,7 @@ class TTodoCard extends StatelessWidget {
       child: Row(
         children: [
           Padding(
-            padding: EdgeInsets.all(padding2),
+            padding: EdgeInsets.all(padding1 - 5),
             child: TCheckbox(
               isChecked: this.todo.done,
               borderColor: Colors.pink,

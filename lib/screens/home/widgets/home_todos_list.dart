@@ -52,7 +52,10 @@ class _HomeTodosListState extends State<HomeTodosList> {
     return Dismissible(
       key: Key(todo.id.toString()),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: padding2, vertical: padding3),
+        padding: EdgeInsets.symmetric(
+          horizontal: padding1 - 5,
+          vertical: padding3,
+        ),
         child: TTodoCard(
           todo: todo,
           onChange: (bool value) => this._handleCheckTodo(value, todo),

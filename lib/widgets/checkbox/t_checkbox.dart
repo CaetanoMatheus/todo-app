@@ -27,8 +27,8 @@ class _TCheckboxState extends State<TCheckbox> {
       onTap: this._toggleChecked,
       child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
-        height: 30,
-        width: 30,
+        height: 25,
+        width: 25,
         decoration: BoxDecoration(
           color: this.widget.isChecked
               ? this.widget.borderColor
@@ -38,7 +38,7 @@ class _TCheckboxState extends State<TCheckbox> {
               ? null
               : Border.all(
                   color: this.widget.borderColor ?? Colors.grey,
-                  width: 3,
+                  width: 2.5,
                 ),
         ),
         child: this.widget.isChecked

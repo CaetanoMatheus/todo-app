@@ -112,6 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   FloatingActionButton buildFloatingActionButton() {
     return FloatingActionButton(
+      backgroundColor: Colors.blue[800],
       child: Icon(Icons.add),
       onPressed: navigateToCreateTodoScreen,
     );

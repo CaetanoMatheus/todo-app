@@ -44,10 +44,11 @@ class TBasicCard extends StatelessWidget {
             style: TextStyle(
               color: primaryColor,
               fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontSize: 22,
+              letterSpacing: .3,
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 15),
           Container(
             height: 5,
             decoration: BoxDecoration(
