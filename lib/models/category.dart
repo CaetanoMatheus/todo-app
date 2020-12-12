@@ -4,6 +4,7 @@ class Category {
   int _id;
   int _color;
   String _name;
+
   Category();
 
   Category.fill(String name, int color, [int id]) {

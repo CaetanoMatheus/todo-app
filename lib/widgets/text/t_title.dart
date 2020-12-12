@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:todo_app/util/constants.dart';
+
 class TTitle extends StatelessWidget {
   final String title;
 
@@ -12,7 +14,7 @@ class TTitle extends StatelessWidget {
       style: TextStyle(
         fontSize: 30,
         fontWeight: FontWeight.bold,
-        color: Color(0xff34495e),
+        color: primaryColor,
       ),
     );
   }

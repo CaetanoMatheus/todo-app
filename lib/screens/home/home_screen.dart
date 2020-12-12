@@ -8,6 +8,7 @@ import 'package:todo_app/models/todo.dart';
 import 'package:todo_app/models/category.dart';
 import 'package:todo_app/helpers/category_helper.dart';
 import 'package:todo_app/helpers/todo_helper.dart';
+import 'package:todo_app/util/constants.dart';
 
 import 'package:todo_app/database_redefinition.dart';
 
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEFEFFF),
+      backgroundColor: backgroundColor,
       appBar: buildAppBar(),
       drawer: buildDrawer(),
       floatingActionButton: buildFloatingActionButton(),
@@ -75,12 +76,34 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar buildAppBar() {
     return AppBar(
-      backgroundColor: Color(0xffEFEFFF),
+      backgroundColor: backgroundColor,
       elevation: 0,
-      iconTheme: IconThemeData(color: Colors.grey[600]),
+      iconTheme: IconThemeData(color: textSecondaryColor),
+      leading: Builder(
+        builder: (BuildContext context) => Padding(
+          padding: EdgeInsets.symmetric(horizontal: padding2),
+          child: IconButton(
+            icon: Icon(Icons.menu, size: 27),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
+      ),
       actions: [
-        IconButton(icon: Icon(Icons.search), onPressed: null),
-        IconButton(icon: Icon(Icons.notifications_outlined), onPressed: null),
+        IconButton(
+          icon: Icon(Icons.search, color: textSecondaryColor, size: 27),
+          onPressed: () {},
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: padding2),
+          child: IconButton(
+            icon: Icon(
+              Icons.notifications_outlined,
+              color: textSecondaryColor,
+              size: 27,
+            ),
+            onPressed: () {},
+          ),
+        ),
       ],
     );
   }

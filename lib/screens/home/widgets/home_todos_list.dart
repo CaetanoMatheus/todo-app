@@ -37,7 +37,7 @@ class _HomeTodosListState extends State<HomeTodosList> {
             vertical: padding2,
             horizontal: padding1,
           ),
-          child: TTextSeparator(title: this._title),
+          child: TTextSeparator(title: this._title, spacedLetters: true),
         ),
         Column(
           children: List.from(

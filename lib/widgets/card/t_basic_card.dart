@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:todo_app/widgets/text/t_text_separator.dart';
+
+import 'package:todo_app/util/constants.dart';
 
 class TBasicCard extends StatelessWidget {
   final String smallText;
@@ -17,10 +20,10 @@ class TBasicCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 200,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(top: 25, right: 20, bottom: 20, left: 20),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: borderRadius,
         boxShadow: [
           BoxShadow(
             color: Colors.grey[200],
@@ -32,13 +35,13 @@ class TBasicCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TTextSeparator(title: this.smallText),
+          TTextSeparator(title: this.smallText, spacedLetters: false),
           SizedBox(height: 10),
           Text(
             this.title,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              color: Color(0xff34495e),
+              color: primaryColor,
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
@@ -48,7 +51,7 @@ class TBasicCard extends StatelessWidget {
             height: 5,
             decoration: BoxDecoration(
               color: this.color,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: borderRadius,
             ),
           ),
         ],
