@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:todo_app/util/constants.dart';
+
 class TCheckbox extends StatefulWidget {
   final bool isChecked;
   final Color borderColor;
@@ -31,18 +33,18 @@ class _TCheckboxState extends State<TCheckbox> {
         width: 25,
         decoration: BoxDecoration(
           color: this.widget.isChecked
-              ? this.widget.borderColor
+              ? textSecondaryColor.withOpacity(.7)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(50),
           border: this.widget.isChecked
               ? null
               : Border.all(
-                  color: this.widget.borderColor ?? Colors.grey,
-                  width: 2.5,
+                  color: secondaryColor,
+                  width: 2,
                 ),
         ),
         child: this.widget.isChecked
-            ? Icon(Icons.done, color: Colors.white)
+            ? Icon(Icons.done, color: Colors.white, size: 16)
             : null,
       ),
     );

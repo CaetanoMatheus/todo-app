@@ -14,10 +14,17 @@ class TTodoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 5),
+      padding: EdgeInsets.symmetric(vertical: 7),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: borderRadius,
+        boxShadow: [
+          BoxShadow(
+            color: textSecondaryColor.withOpacity(.1),
+            offset: Offset(2, 4),
+            blurRadius: 10,
+          )
+        ],
       ),
       child: Row(
         children: [

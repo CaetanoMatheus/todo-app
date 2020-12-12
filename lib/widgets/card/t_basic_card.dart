@@ -54,6 +54,13 @@ class TBasicCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: this.color,
               borderRadius: borderRadius,
+              boxShadow: [
+                BoxShadow(
+                  color: this.color.withOpacity(.6),
+                  offset: Offset(2, 2),
+                  blurRadius: 8,
+                )
+              ],
             ),
           ),
         ],

@@ -62,13 +62,17 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: buildFloatingActionButton(),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            HomeGreetings('What\'s up, Matheus!'),
-            HomeCategoriesList(categories: this.categories, todos: this.todos),
-            HomeTodosList(todos: this.todos),
-          ],
+        child: Padding(
+          padding: EdgeInsets.only(bottom: padding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HomeGreetings('What\'s up, Matheus!'),
+              HomeCategoriesList(
+                  categories: this.categories, todos: this.todos),
+              HomeTodosList(todos: this.todos),
+            ],
+          ),
         ),
       ),
     );
