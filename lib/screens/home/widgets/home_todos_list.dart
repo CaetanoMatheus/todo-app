@@ -27,6 +27,8 @@ class _HomeTodosListState extends State<HomeTodosList> {
     this._todoHelper.update(todo);
   }
 
+  _handleDestroyTodo(Todo todo) => this._todoHelper.destroy(todo.id);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,6 +53,7 @@ class _HomeTodosListState extends State<HomeTodosList> {
   Dismissible _buildTodoItem(Todo todo) {
     return Dismissible(
       key: Key(todo.id.toString()),
+      onDismissed: (direction) => this._handleDestroyTodo(todo),
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: padding1 - 5,

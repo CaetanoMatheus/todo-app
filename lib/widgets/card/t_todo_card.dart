@@ -42,7 +42,8 @@ class TTodoCard extends StatelessWidget {
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: fontWeight,
-                color: textPrimaryColor,
+                color: this.todo.done ? textSecondaryColor : textPrimaryColor,
+                decoration: this.todo.done ? TextDecoration.lineThrough : null,
               ),
             ),
           ),

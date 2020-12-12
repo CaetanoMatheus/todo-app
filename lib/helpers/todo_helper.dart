@@ -54,4 +54,13 @@ class TodoHelper {
       whereArgs: [todo.id],
     );
   }
+
+  Future<int> destroy(int id) async {
+    Database database = await databaseHelper.database;
+    return await database.delete(
+      tableName,
+      where: '$columnId = ?',
+      whereArgs: [id],
+    );
+  }
 }

@@ -38,8 +38,11 @@ class HomeCategoriesList extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: padding1),
             child: Row(
-              children: List.from(this.categories.map(
-                  (Category category) => this._buildCategoryItem(category))),
+              children: List.from(
+                this.categories.map(
+                      (Category category) => this._buildCategoryItem(category),
+                    ),
+              ),
             ),
           ),
         )
