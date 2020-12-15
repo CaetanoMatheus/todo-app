@@ -8,10 +8,14 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
-  sqflite:
+  flutter_mobx: ^1.1.0+2
+  mobx: ^1.2.1+4
   google_fonts:
+  sqflite:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mobx_codegen:
+  build_runner:
 flutter:
   uses-material-design: true

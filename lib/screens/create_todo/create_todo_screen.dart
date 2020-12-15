@@ -1,49 +1,45 @@
 import 'package:flutter/material.dart';
 
-class CreateTodoScreen extends StatefulWidget {
-  @override
-  _CreateTodoScreenState createState() => _CreateTodoScreenState();
-}
+import 'package:todo_app/widgets/button/t_close_button.dart';
+import 'package:todo_app/models/category.dart';
 
-class _CreateTodoScreenState extends State<CreateTodoScreen> {
-  navigateBack() {
-    Navigator.pop(context);
-  }
+import 'package:todo_app/util/constants.dart';
+import 'package:todo_app/widgets/input/t_input.dart';
+import 'package:todo_app/widgets/list/t_categories_list.dart';
+
+class CreateTodoScreen extends StatelessWidget {
+  final List<Category> categories;
+
+  const CreateTodoScreen({Key key, this.categories}) : super(key: key);
+
+  void _navigateBack(BuildContext context) => Navigator.pop(context);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEFEFFF),
+      backgroundColor: backgroundColor,
       body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey[400], width: 2),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: IconButton(
-                        icon: Icon(Icons.close, color: Colors.grey[700]),
-                        splashRadius: 27,
-                        onPressed: navigateBack,
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                ],
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  border: InputBorder.none,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Spacer(),
+                Padding(
+                  padding: EdgeInsets.all(20),
+                  child: TCloseButton(onTap: this._navigateBack),
                 ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * .1,
+                right: padding,
+                left: padding,
               ),
-            ],
-          ),
+              child: TInput(label: 'Enter a new task'),
+            ),
+            Text(this.categories[0].toString()),
+          ],
         ),
       ),
     );
