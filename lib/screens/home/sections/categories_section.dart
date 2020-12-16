@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_mobx/flutter_mobx.dart';
+
 import 'package:todo_app/models/category.dart';
 import 'package:todo_app/models/todo.dart';
 import 'package:todo_app/stores/category/category_store.dart';
@@ -42,20 +42,20 @@ class CategoriesSection extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: padding),
           child: TTextSeparator(title: this.title, spacedLetters: true),
         ),
-        Observer(
-          builder: (_) => SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: padding1),
-              child: Row(
+        SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: padding1),
+            child: Observer(
+              builder: (BuildContext context) => Row(
                 children: List.from(this.categoryStore.categories.map(
                       (Category category) => this._buildCategoryItem(category),
                     )),
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
