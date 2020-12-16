@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: List.from(this.todoStore.todos.map(
                       (Todo todo) => Dismissible(
                         key: Key(todo.id.toString()),
-                        onDismissed: (DismissDirection direction) => () {},
+                        onDismissed: (_) => this.todoStore.destroy(todo),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: padding1 - 5,

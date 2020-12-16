@@ -33,4 +33,10 @@ abstract class _TodoStore with Store {
     await this._todoHelper.update(todo);
     this.getTodos();
   }
+
+  @action
+  void destroy(Todo todo) async {
+    await this._todoHelper.destroy(todo.id);
+    this.getTodos();
+  }
 }
