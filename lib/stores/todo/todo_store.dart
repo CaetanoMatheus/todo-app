@@ -10,8 +10,8 @@ part 'todo_store.g.dart';
 class TodoStore = _TodoStore with _$TodoStore;
 
 abstract class _TodoStore with Store {
-  TodoHelper todoHelper = TodoHelper();
-  CategoryHelper categoryHelper = CategoryHelper();
+  TodoHelper _todoHelper = TodoHelper();
+  CategoryHelper _categoryHelper = CategoryHelper();
 
   @observable
   List<Todo> todos = [];
@@ -20,7 +20,17 @@ abstract class _TodoStore with Store {
   List<Category> todosCategories = [];
 
   @action
-  getTodos() async => this.todos = await todoHelper.all();
+  getTodos() async => this.todos = await this._todoHelper.all();
 
-  getCategories() async => this.todosCategories = await categoryHelper.all();
+  @action
+  getCategories() async {
+    this.todosCategories = await this._categoryHelper.all();
+  }
+
+  @action
+  void toggleTodoCheck(Todo todo) async {
+    todo.done = !todo.done;
+    await this._todoHelper.update(todo);
+    this.getTodos();
+  }
 }
