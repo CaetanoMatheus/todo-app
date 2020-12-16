@@ -24,33 +24,31 @@ mixin _$TodoStore on _TodoStore, Store {
     });
   }
 
-  final _$todosCategoriesAtom = Atom(name: '_TodoStore.todosCategories');
+  final _$getAllAsyncAction = AsyncAction('_TodoStore.getAll');
 
   @override
-  List<Category> get todosCategories {
-    _$todosCategoriesAtom.reportRead();
-    return super.todosCategories;
+  Future<void> getAll() {
+    return _$getAllAsyncAction.run(() => super.getAll());
   }
 
+  final _$toggleCheckAsyncAction = AsyncAction('_TodoStore.toggleCheck');
+
   @override
-  set todosCategories(List<Category> value) {
-    _$todosCategoriesAtom.reportWrite(value, super.todosCategories, () {
-      super.todosCategories = value;
-    });
+  Future<void> toggleCheck(Todo todo) {
+    return _$toggleCheckAsyncAction.run(() => super.toggleCheck(todo));
   }
 
-  final _$getTodosAsyncAction = AsyncAction('_TodoStore.getTodos');
+  final _$destroyAsyncAction = AsyncAction('_TodoStore.destroy');
 
   @override
-  Future getTodos() {
-    return _$getTodosAsyncAction.run(() => super.getTodos());
+  Future<void> destroy(Todo todo) {
+    return _$destroyAsyncAction.run(() => super.destroy(todo));
   }
 
   @override
   String toString() {
     return '''
-todos: ${todos},
-todosCategories: ${todosCategories}
+todos: ${todos}
     ''';
   }
 }

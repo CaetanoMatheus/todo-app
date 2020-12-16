@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_app/models/category.dart';
 import 'package:todo_app/screens/create_todo/create_todo_screen.dart';
+import 'package:todo_app/screens/home/sections/categories_section.dart';
 import 'package:todo_app/screens/home/widgets/home_container.dart';
 
 import 'package:todo_app/models/todo.dart';
+import 'package:todo_app/stores/category/category_store.dart';
 import 'package:todo_app/stores/todo/todo_store.dart';
 import 'package:todo_app/util/constants.dart';
 
@@ -20,7 +22,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TodoStore todoStore = TodoStore();
+  final TodoStore todoStore = TodoStore();
+  final CategoryStore categoryStore = CategoryStore();
 
   navigateToCreateTodoScreen() async {
     Navigator.push(
@@ -35,8 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // buildDatabaseStuff().then((_) {
-    this.todoStore.getCategories();
-    this.todoStore.getTodos();
+    this.categoryStore.getAll();
+    this.todoStore.getAll();
     // });
   }
 
@@ -57,39 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
               EdgeInsets.symmetric(vertical: padding1, horizontal: padding),
           child: TTitle(title: 'What\'s up, Matheus!'),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: padding),
-              child: TTextSeparator(
-                title: 'CATEGORIES',
-                spacedLetters: true,
-              ),
-            ),
-            Observer(
-              builder: (_) => SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: padding1),
-                  child: Row(
-                    children: List.from(this.todoStore.todosCategories.map(
-                          (Category category) => Padding(
-                            padding: EdgeInsets.only(left: padding1 - 5),
-                            child: TBasicCard(
-                              smallText:
-                                  '${this._calculateRemainingTasks(category)} tasks',
-                              title: category.name,
-                              color: Color(category.color),
-                            ),
-                          ),
-                        )),
-                  ),
-                ),
-              ),
-            )
-          ],
+        CategoriesSection(
+          categoryStore: this.categoryStore,
+          todoStore: this.todoStore,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,8 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: TTodoCard(
                             todo: todo,
-                            onChange: (_) =>
-                                this.todoStore.toggleTodoCheck(todo),
+                            onChange: (_) {
+                              this.todoStore.toggleCheck(todo);
+                            },
                           ),
                         ),
                       ),

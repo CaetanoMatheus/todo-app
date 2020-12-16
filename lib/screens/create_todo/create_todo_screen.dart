@@ -5,7 +5,6 @@ import 'package:todo_app/models/category.dart';
 
 import 'package:todo_app/util/constants.dart';
 import 'package:todo_app/widgets/input/t_input.dart';
-import 'package:todo_app/widgets/list/t_categories_list.dart';
 
 class CreateTodoScreen extends StatelessWidget {
   final List<Category> categories;
