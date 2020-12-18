@@ -30,16 +30,19 @@ class _CategoriesSectionState extends State<CategoriesSection> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: padding1),
-        child: Observer(
-          builder: (BuildContext context) => Row(
-            children: List.from(this.widget.categoryStore.categories.map(
-                  (Category category) => this._buildCategoryItem(category),
-                )),
+    return Hero(
+      tag: 'CategoriesList',
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: padding1),
+          child: Observer(
+            builder: (BuildContext context) => Row(
+              children: List.from(this.widget.categoryStore.categories.map(
+                    (Category category) => this._buildCategoryItem(category),
+                  )),
+            ),
           ),
         ),
       ),
