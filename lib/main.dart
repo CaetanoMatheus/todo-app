@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:todo_app/screens/home/home_screen.dart';
+import 'package:todo_app/router/app_router.dart';
 
 void main() => runApp(TodoApp());
 
@@ -10,7 +10,8 @@ class TodoApp extends StatelessWidget {
     return MaterialApp(
       title: 'Todo App',
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      initialRoute: AppRouter.initialRoute,
+      onGenerateRoute: AppRouter.generateRoute,
     );
   }
 }

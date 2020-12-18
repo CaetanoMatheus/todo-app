@@ -39,7 +39,7 @@ class TodosSection extends StatelessWidget {
   Widget _buildTodoItem(Todo todo) {
     return Dismissible(
       key: Key(todo.id.toString()),
-      onDismissed: (_) => this.todoStore.destroy(todo),
+      onDismissed: (DismissDirection direction) => this.todoStore.destroy(todo),
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: padding1 - 5,
@@ -47,7 +47,7 @@ class TodosSection extends StatelessWidget {
         ),
         child: TTodoCard(
           todo: todo,
-          onChange: (_) => this.todoStore.toggleCheck(todo),
+          onChange: (bool value) => this.todoStore.toggleCheck(todo),
         ),
       ),
     );

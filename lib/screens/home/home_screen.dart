@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:todo_app/screens/create_todo/create_todo_screen.dart';
 import 'package:todo_app/screens/home/sections/categories_section.dart';
 import 'package:todo_app/screens/home/sections/todos_section.dart';
 import 'package:todo_app/screens/home/widgets/home_container.dart';
@@ -23,10 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // buildDatabaseStuff().then((_) {
+    // buildDatabaseStuff();
     this._categoryStore.getAll();
     this._todoStore.getAll();
-    // });
   }
 
   String _getGreetingMessage() => 'What\'s up, Matheus!';

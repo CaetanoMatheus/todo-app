@@ -11,7 +11,7 @@ abstract class _CategoryStore with Store {
   CategoryHelper _categoryHelper = CategoryHelper();
 
   @observable
-  List<Category> categories = [];
+  List<Category> categories = ObservableList();
 
   @action
   Future<void> getAll() async {

@@ -36,7 +36,9 @@ class TBasicCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TTextSeparator(title: this.smallText, spacedLetters: false),
+          this.smallText != null
+              ? TTextSeparator(title: this.smallText, spacedLetters: false)
+              : Container(),
           SizedBox(height: 10),
           Text(
             this.title,
