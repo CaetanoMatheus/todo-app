@@ -38,6 +38,13 @@ mixin _$TodoStore on _TodoStore, Store {
     return _$toggleCheckAsyncAction.run(() => super.toggleCheck(todo));
   }
 
+  final _$createAsyncAction = AsyncAction('_TodoStore.create');
+
+  @override
+  Future<Todo> create(Todo todo) {
+    return _$createAsyncAction.run(() => super.create(todo));
+  }
+
   final _$destroyAsyncAction = AsyncAction('_TodoStore.destroy');
 
   @override

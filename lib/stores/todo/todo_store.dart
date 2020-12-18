@@ -24,6 +24,13 @@ abstract class _TodoStore with Store {
   }
 
   @action
+  Future<Todo> create(Todo todo) async {
+    Todo newTodo = await this._todoHelper.create(todo);
+    this.getAll();
+    return newTodo;
+  }
+
+  @action
   Future<void> destroy(Todo todo) async {
     await this._todoHelper.destroy(todo.id);
     this.getAll();

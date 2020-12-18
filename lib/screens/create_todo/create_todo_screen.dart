@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:todo_app/models/todo.dart';
+import 'package:todo_app/router/app_router.dart';
+import 'package:todo_app/screens/create_todo/sections/categories_section.dart';
 import 'package:todo_app/stores/category/category_store.dart';
 import 'package:todo_app/stores/todo/todo_store.dart';
 import 'package:todo_app/util/constants.dart';
 
 import 'package:todo_app/widgets/button/t_close_button.dart';
-import 'package:todo_app/models/category.dart';
 
-import 'package:todo_app/util/constants.dart';
-import 'package:todo_app/widgets/card/t_basic_card.dart';
+import 'package:todo_app/widgets/button/t_glow_button.dart';
 import 'package:todo_app/widgets/input/t_input.dart';
 
 class CreateTodoScreen extends StatefulWidget {
@@ -21,13 +20,22 @@ class _CreateTodoScreenState extends State<CreateTodoScreen> {
   final CategoryStore _categoryStore = CategoryStore();
   final TodoStore _todoStore = TodoStore();
   final Todo _todo = Todo.fill(null, false, 1);
-
-  void _navigateBack(BuildContext context) => Navigator.pop(context);
+  final TextEditingController _textController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     this._categoryStore.getAll();
+  }
+
+  void _navigateBack(BuildContext context) => Navigator.pop(context);
+
+  void _navigateToInitialScreen(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      AppRouter.initialRoute,
+      (_) => false,
+    );
   }
 
   @override
@@ -56,105 +64,32 @@ class _CreateTodoScreenState extends State<CreateTodoScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TInput(label: 'Enter a new task'),
+                  TInput(
+                    label: 'Enter a new task',
+                    controller: this._textController,
+                  ),
                 ],
               ),
             ),
             SizedBox(height: 30),
-            SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: padding1),
-                child: Observer(
-                  builder: (BuildContext context) => Row(
-                    children: List.from(this._categoryStore.categories.map(
-                          (Category category) =>
-                              this._buildCategoryItem(category),
-                        )),
-                  ),
-                ),
-              ),
+            CategoriesSection(
+              categoryStore: this._categoryStore,
+              todo: this._todo,
             ),
             Spacer(),
-            Container(
-              width: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                boxShadow: [
-                  BoxShadow(
-                    color: accentColor.withOpacity(.8),
-                    offset: Offset(0, 3),
-                    blurRadius: 10,
-                  )
-                ],
-              ),
-              child: RaisedButton(
-                color: accentColor,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                onPressed: () {},
-                child: Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'New Task',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Icon(Icons.add, color: Colors.white),
-                    ],
-                  ),
-                ),
-              ),
+            TGlowButton(
+              'New Task',
+              icon: Icons.add,
+              color: accentColor,
+              onTap: () {
+                if (this._textController.text.length < 1) return;
+                this._todo.title = this._textController.text;
+                this._todoStore.create(this._todo);
+                this._navigateToInitialScreen(context);
+              },
             ),
             SizedBox(height: 50),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCategoryItem(Category category) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          this._todo.categoryId = category.id;
-        });
-      },
-      child: Padding(
-        padding: EdgeInsets.only(left: padding1 - 5),
-        child: AnimatedContainer(
-          duration: Duration(milliseconds: 300),
-          padding: EdgeInsets.all(4),
-          decoration: BoxDecoration(
-              borderRadius: borderRadius,
-              color: this._todo.categoryId == category.id
-                  ? Color(category.color)
-                  : textSecondaryColor,
-              boxShadow: [
-                BoxShadow(
-                  color: this._todo.categoryId == category.id
-                      ? Color(category.color).withOpacity(.6)
-                      : backgroundColor,
-                  offset: Offset(0, 3),
-                  blurRadius: 8,
-                )
-              ]),
-          child: TBasicCard(
-            title: category.name,
-            color: Color(category.color),
-          ),
         ),
       ),
     );
